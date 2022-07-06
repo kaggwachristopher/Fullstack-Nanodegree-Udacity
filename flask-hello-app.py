@@ -11,9 +11,13 @@ class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(), nullable=False)
 
+db.create_all()
+
 @app.route('/')
 def index():
-    return 'Hello world'
+    person = Person.query.first()
+    return 'Hello ' + person.name
 
 if __name__ == '__main__':
-   app.run(host="0.0.0.0")
+    app.debug = True
+    app.run(host="0.0.0.0")
